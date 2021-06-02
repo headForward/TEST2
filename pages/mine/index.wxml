@@ -1,0 +1,34 @@
+<view class="m-window m-mine">
+    <view class="container">
+        <view class="userinfo">
+            <view class="image">
+                <image bindtap="bindViewTap" class="userinfo-avatar" src="{{basicUserInfo.avatarUrl}}" mode="cover" />
+            </view>
+            <view class="username">
+                <view class="nickname">
+                    <text>{{basicUserInfo.oaUserInfo.lastname || basicUserInfo.crmUserInfo.name}}</text>
+                </view>
+                <view class="bemerkungen">
+                    <text>工号:{{basicUserInfo.oaUserInfo.loginid}} | {{basicUserInfo.oaUserInfo.departmentname}}</text>
+                </view>
+            </view>
+        </view>
+        <view>
+            <van-cell-group class="m-noDivider">
+                <van-cell bind:click="getUserInfo" is-link>
+                    <view slot="title" class="icon-typ-right">
+                        <van-icon size="24" name="friends-o" color="#07C160" />
+                        <text>基本信息</text>
+                    </view>
+                </van-cell>
+            </van-cell-group>
+        </view>
+        <view class="m-footer">
+            <view class="btn">
+                <van-button plain type="primary" class="btnSignout" bind:click="signout">
+                    退出
+                </van-button>
+            </view>
+        </view>
+    </view>
+</view>

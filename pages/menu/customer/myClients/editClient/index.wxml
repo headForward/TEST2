@@ -1,0 +1,87 @@
+<!-- pages/menu/customer/myClients/clientDetail/index.wxml -->
+<view class="m-window m-clientDetail m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <view class="users">
+                <van-cell-group title="客户信息">
+                    <van-field name="na" label="名称" value="{{detailList.na}}" placeholder="请输入名称" required
+                        bind:blur="handleNaChange" data-label="na" input-align="right" error-message="{{errna}}"
+                        error-message-align="right" />
+                    <van-field name="area" label="所在地区" value="{{detailList.provice+detailList.city+detailList.cty}}"
+                        required readonly is-link input-align="right" bind:tap="selectShow" data-label="所在地区"
+                        error-message="{{errarea}}" error-message-align="right" />
+                    <van-field name="address" label="详细地址" value="{{detailList.address}}" placeholder="请输入详细地址" required
+                        bind:blur="handleNaChange" data-label="address" input-align="right"
+                        error-message="{{erraddress}}" error-message-align="right" />
+                    <van-cell title="来源" value="{{detailList.src}}" is-link bind:click="selectShow" data-label="来源" />
+                    <van-cell title="行业" value="{{detailList.industry}}" is-link bind:click="selectShow"
+                        data-label="行业" />
+                    <van-cell title="客户级别" value="{{detailList.lev}}" is-link bind:click="selectShow"
+                        data-label="客户级别" />
+                    <van-field name="followers" label="跟进人" model:value="{{followers}}" required readonly
+                        is-link="{{ferShow}}" input-align="right" bind:tap="goSelectFollower"
+                        error-message="{{errfollowers}}" error-message-align="right" />
+                </van-cell-group>
+            </view>
+            <view class="contacts">
+                <block wx:for="{{contactList}}" wx:key="index">
+                    <view class="contactsInfo" data-idx="{{index}}" bind:tap="removeRecord" hidden="{{index == 0}}">
+                        <text class="infoAdd">删除</text>
+                    </view>
+                    <van-cell-group title="联系人信息{{index+1}}">
+                        <van-field name="name" label="名称" value="{{item.name}}" placeholder="请输入联系人名称" required
+                            bind:blur="handleChange" data-label="name" data-idx="{{index}}" input-align="right"
+                            error-message="{{item.errname}}" error-message-align="right" />
+                        <van-field label="职务" value="{{item.job}}" placeholder="请输入联系人职务" bind:blur="handleChange"
+                            data-label="job" data-idx="{{index}}" input-align="right" />
+                        <van-field type="number" name="mobilePhone" label="手机" value="{{item.mobilePhone}}"
+                            placeholder="请输入联系人手机" required bind:blur="handleChange" data-label="mobilePhone"
+                            data-idx="{{index}}" input-align="right" error-message="{{item.errmobilePhone}}"
+                            error-message-align="right" maxlength="11" />
+                        <van-field type="number" label="座机" value="{{item.telephone}}" placeholder="请输入联系人座机"
+                            bind:blur="handleChange" data-label="telephone" data-idx="{{index}}" input-align="right" />
+                        <van-field label="邮箱" name="email" value="{{item.email}}" placeholder="请输入联系人邮箱"
+                            bind:blur="handleChange" data-label="email" data-idx="{{index}}" input-align="right"
+                            error-message="{{item.erremail}}" error-message-align="right" />
+                        <van-cell title="性别">
+                            <van-radio-group value="{{ item.sex }}" bind:change="handleSexChange" data-idx="{{index}}"
+                                class="geschlecht">
+                                <van-radio name="1" shape="square" checked-color="#07c160">
+                                    男
+                                </van-radio>
+                                <van-radio name="0" shape="square" checked-color="#07c160">
+                                    女
+                                </van-radio>
+                            </van-radio-group>
+                        </van-cell>
+                        <van-field label="备注" value="{{item.contactRemark}}" placeholder="请输入备注"
+                            bind:blur="handleChange" data-label="contactRemark" data-idx="{{index}}"
+                            input-align="right" />
+                        <view class="ms-photo">
+                            <van-uploader file-list="{{ item.fileList }}" bind:after-read="fileUpload"
+                                bind:delete="fileDelete" max-count="1" data-idx="{{index}}" />
+                        </view>
+                    </van-cell-group>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" bind:click="addRecord"
+                disabled="{{contactList.length==5}}">
+                添加联系人
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="handleSave">
+                保存
+            </van-button>
+        </view>
+    </view>
+    <van-popup show="{{ isAddShow }}" position="bottom">
+        <van-area area-list="{{ areaList }}" model:value="{{area}}" bind:cancel="onCancel"
+            bind:confirm="onAddConfirm" />
+    </van-popup>
+    <pickerPopup isShow="{{isShow}}" columns="{{columns}}" bind:onConfirm="onConfirm" />
+    <!-- <date-picker-popup isShow="{{isShow}}" currentDate="{{currentDate}}" minDate="{{minDate}}" maxDate="{{maxDate}}"
+        pickerType="{{pickerType}}" bind:onConfirm="onConfirm"></date-picker-popup> -->
+</view>

@@ -1,0 +1,38 @@
+<!-- pages/menu/followerMultiple/index.wxml -->
+<view class="m-window m-followerMultiple m-flex">
+    <view class="m-header">
+        <view class="header-search">
+            <view class="header-inp">
+                <view class="inp">
+                    <van-search model:value="{{ searchVal }}" placeholder="请输入姓名" bind:change="onSearch" use-left-icon-slot="false" />
+                    <view class="inp-icon">
+                        <text class="iconfont icon-search"></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <van-cell-group class="m-noDivider">
+                <van-cell wx:for="{{list}}" wx:key="index">
+                    <van-checkbox-group value="{{ val }}">
+                        <van-checkbox name="{{item.userid}}" checked-color="#07c160">
+                            {{item.name}}
+                        </van-checkbox>
+                    </van-checkbox-group>
+                </van-cell>
+            </van-cell-group>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" bind:click="handleCancle">
+                取消
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="handleComfirm">
+                确定
+            </van-button>
+        </view>
+    </view>
+</view>

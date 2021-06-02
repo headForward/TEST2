@@ -1,0 +1,29 @@
+<!-- pages/menu/sales/task/detailSubtask/index.wxml -->
+<view class="m-window m-detailSubtask m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <view>
+                <van-cell-group>
+                    <van-cell title="标题" value="{{tn}}" />
+                    <van-cell label="{{cont}}" label-class="descInput" />
+                </van-cell-group>
+            </view>
+            <view>
+                <van-cell-group>
+                    <van-cell title="负责人" value="{{ma}}" />
+                    <van-cell title="截止日期" value="{{etfmt}}" />
+                </van-cell-group>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" color="#FA5151" bind:click="handleDelete">
+                删除
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="goEditTask">
+                编辑
+            </van-button>
+        </view>
+    </view>
+</view>

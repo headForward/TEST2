@@ -1,0 +1,21 @@
+<!-- pages/menu/customer/visitClient/datailVisit/index.wxml -->
+<view class="m-window m-detailVisit m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group>
+                    <van-cell title="客户名称" value="{{visitDetail.name}}" />
+                    <van-cell title="客户类型" value="{{visitDetail.customerType==0?'正式客户':'潜在客户'}}" />
+                    <van-cell title="时间" value="{{visitDetail.createdfmt}}" />
+                    <van-cell title="跟进人" value="{{visitDetail.follower}}" />
+                    <van-cell title="位置" value="{{visitDetail.location}}" is-link="{{visitDetail.location !== '无'}}" bind:tap="locationMap" />
+                    <van-cell title="跟进详情" label="{{visitDetail.content}}" />
+                </van-cell-group>
+                <block wx:for="{{urls}}" wx:key="index">
+                    <van-image width="100" height="100" src="{{item}}" bind:tap="handlePreview" data-url="{{item}}" />
+                </block>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+</view>

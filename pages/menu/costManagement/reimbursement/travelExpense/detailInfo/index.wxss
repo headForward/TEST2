@@ -1,0 +1,12 @@
+.de-title {
+    float: left;
+    padding: 16px 16px 8px;
+    font-size: 14px;
+    color: #969799;
+  }
+  .de-val {
+    float: right;
+    padding: 16px 16px 8px;
+    font-size: 15px;
+    color: #000;
+  }

@@ -1,0 +1,28 @@
+<!-- pages/menu/project/discountVerification/detailOA/index.wxml -->
+<view class="m-window m-detailOA m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring scroll-top="{{scrollY}}" bindscroll="onScroll" refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh" bindscrolltolower="onLoading">
+            <van-cell-group>
+                <van-collapse accordion value="{{ activeNames }}" bind:change="onChange" custom-class="foldingPanel">
+                    <block wx:for="{{list}}" wx:for-item="i" wx:key="index">
+                        <block wx:for="{{i.a}}" wx:key="matnr">
+                            <van-collapse-item title="{{item.merSpec}}" name="{{item.matnr}}">
+                                <view class="fold">
+                                    <van-cell title="核销日期" value="{{item.lfdat}}" />
+                                    <van-cell title="申请者" value="{{item.ernam}}" />
+                                    <van-cell title="发票号" value="{{item.fvbeln}}" />
+                                    <van-cell title="物料号" value="{{item.matnr}}" />
+                                    <van-cell title="销售机构" value="{{item.vkorg}}" />
+                                    <van-cell title="开票单位" value="{{item.vrkme}}" />
+                                    <van-cell title="开票数量" value="{{item.fkimg}}" />
+                                    <van-cell title="开票单价" value="{{item.zprice}}" />
+                                    <van-cell title="开票金额" value="{{item.zmoney}}" />
+                                </view>
+                            </van-collapse-item>
+                        </block>
+                    </block>
+                </van-collapse>
+            </van-cell-group>
+        </scroll-view>
+    </view>
+</view>

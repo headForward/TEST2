@@ -1,0 +1,13 @@
+<view class="m-window m-menu">
+    <view wx:for="{{appList}}" wx:for-item="i" wx:key="name" class="menu-spalte">
+        <van-grid gutter="{{ 5 }}" border="{{false}}">
+            <view class="spalte-title">
+                <text>{{i.name}}</text>
+                <text class="iconfont icon-menu-fill"></text>
+            </view>
+            <view class="spalte-content">
+                <van-grid-item wx:for="{{i.contentList}}" wx:for-item="j" wx:key="name" icon="{{j.imgsrc||img}}" text="{{j.name}}" link-type="navigateTo" url="{{j.url}}" icon-size="50px" />
+            </view>
+        </van-grid>
+    </view>
+</view>

@@ -1,0 +1,18 @@
+<view class="m-window m-mine">
+    <view class="m-middle">
+        <scroll-view scroll-y scroll-anchoring>
+            <view>
+                <van-cell-group>
+                    <van-cell title="姓名" value="{{basicInformation.oaUserInfo.lastname}}" />
+                    <van-cell title="公司" value="{{basicInformation.oaUserInfo.subcompanyname}}" />
+                    <van-cell title="工号" value="{{basicInformation.loginAccount}}" />
+                    <van-cell title="部门" value="{{basicInformation.oaUserInfo.departmentname}}" />
+                    <van-cell title="岗位" value="{{basicInformation.oaUserInfo.jobtitlename}}" />
+                    <van-cell title="OA" value="{{basicInformation.oaUserInfo.loginid}}" />
+                    <van-cell title="手机" value="{{basicInformation.telPhone}}" />
+                    <van-cell title="邮箱" value="{{basicInformation.oaUserInfo.email}}" />
+                </van-cell-group>
+            </view>
+        </scroll-view>
+    </view>
+</view>

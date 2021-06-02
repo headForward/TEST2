@@ -1,0 +1,22 @@
+<!--pages/login/index.wxml-->
+<view class="login">
+    <view class="wx-login">
+        <view class="login-account">
+            <van-cell-group>
+                <van-field model:value="{{ username }}" clearable label="账号" placeholder="请输入账号" />
+            </van-cell-group>
+        </view>
+        <view class="login-password">
+            <van-cell-group>
+                <van-field model:value="{{ password }}" type="password" label="密码" placeholder="请输入密码" clearable />
+            </van-cell-group>
+        </view>
+        <view class="btn">
+            <van-button type="primary" block class="btnSingle" open-type="getPhoneNumber"
+                bindgetphonenumber="getPhoneNumber">登录</van-button>
+        </view>
+    </view>
+
+    <getUserAuth isShow="{{isUserInfo==true}}" bind:getUserAuth="getUserAuth" bind:cancel="cancel" />
+
+</view>

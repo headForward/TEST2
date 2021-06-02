@@ -1,0 +1,95 @@
+<!-- pages/menu/project/projectInfo/detailProject/index.wxml -->
+<view class="m-window m-projectDetail m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group title="工程信息">
+                    <van-cell title="工程名称" value="{{detailList.prn}}" />
+                    <van-cell title="工程说明" value="{{detailList.ex}}" />
+                    <van-cell title="工程项目号" value="{{detailList.projectNo}}" />
+                    <van-cell title="客户名称" value="{{detailList.cn}}" />
+                    <van-cell title="工程区域" value="{{detailList.pro+detailList.cy+detailList.dis+detailList.add}}" />
+                    <van-cell title="工程面积" value="{{detailList.acreage}}" />
+                    <van-cell title="工程大类" value="{{detailList.category}}" />
+                    <van-cell title="开工时间" value="{{detailList.startTimefmt}}" />
+                    <van-cell title="工程类型" value="{{detailList.prt}}" />
+                    <van-cell title="工程进度" value="{{detailList.prg}}" />
+                    <van-cell title="工程状态" value="{{detailList.prs}}" />
+                    <van-cell title="介入深度" value="{{detailList.depth}}" />
+                </van-cell-group>
+                <van-cell-group>
+                    <van-cell title="造价" value="{{detailList.prcfmt}}" />
+                    <van-cell title="供货量" value="{{detailList.shipmentsfmt}}" />
+                    <van-cell title="已供比例" value="{{detailList.supplied}}" />
+                    <van-cell title="所用品牌" value="{{detailList.ba}}" />
+                    <van-cell title="所用产品" value="{{detailList.productDes}}" />
+                    <van-cell title="占有率" value="{{detailList.occupancyRate}}" />
+                </van-cell-group>
+                <van-cell-group title="工程图片" wx:if="{{urls.length}}">
+                    <block wx:for="{{urls}}" wx:key="index">
+                        <van-image width="100" height="100" src="{{item}}" bind:tap="handlePreview" data-url="{{item}}" />
+                    </block>
+                </van-cell-group>
+                <van-cell-group title="跟进人">
+                    <van-cell title="{{detailList.follower}}" />
+                </van-cell-group>
+                <van-cell-group title="甲方信息">
+                    <van-cell title="单位名称" value="{{detailList.pra.org}}" />
+                    <van-cell title="联系人" value="{{detailList.pra.contact}}" />
+                    <van-cell title="联系电话" value="{{detailList.pra.tel}}" />
+                </van-cell-group>
+                <van-cell-group title="乙方信息">
+                    <van-cell title="单位名称" value="{{detailList.prb.org}}" />
+                    <van-cell title="联系人" value="{{detailList.prb.contact}}" />
+                    <van-cell title="联系电话" value="{{detailList.prb.tel}}" />
+                </van-cell-group>
+                <van-cell-group title="监理方信息">
+                    <van-cell title="单位名称" value="{{detailList.sup.org}}" />
+                    <van-cell title="联系人" value="{{detailList.sup.contact}}" />
+                    <van-cell title="联系电话" value="{{detailList.sup.tel}}" />
+                </van-cell-group>
+                <van-cell-group title="设计院信息">
+                    <van-cell title="单位名称" value="{{detailList.des.org}}" />
+                    <van-cell title="联系人" value="{{detailList.des.contact}}" />
+                    <van-cell title="联系电话" value="{{detailList.des.tel}}" />
+                </van-cell-group>
+                <van-cell-group title="供货方信息">
+                    <van-cell title="单位名称" value="{{detailList.supplier.org}}" />
+                    <van-cell title="联系人" value="{{detailList.supplier.contact}}" />
+                    <van-cell title="联系电话" value="{{detailList.supplier.tel}}" />
+                </van-cell-group>
+                <van-cell-group wx:for="{{detailList.pu}}" title="产品信息{{index+1}}" wx:key="index">
+                    <van-cell title="产品名称" value="{{item.name}}" />
+                    <van-cell wx:if="{{item.amount}}" title="用量" value="{{item.amount}}" />
+                    <van-cell wx:if="{{item.price}}" title="价格" value="{{item.pricefmt}}" />
+                    <van-cell wx:if="{{item.cycle}}" title="使用周期" value="{{item.cycle}}" />
+                    <van-cell wx:if="{{item.remark}}" title="备注" value="{{item.remark}}" />
+                </van-cell-group>
+                <van-cell-group title="跟进记录" wx:if="{{followList.length != 0}}" class="m-noDivider">
+                    <van-cell wx:for="{{followList}}" wx:key="index" title="{{item.cont}}" use-label-slot is-link bind:click="getFollowDetail" data-index="{{index}}">
+                        <view slot="label">
+                            <view>创建时间：{{item.ct}}</view>
+                            <view>跟进人：{{item.fer}}</view>
+                        </view>
+                    </van-cell>
+                    <view class="btn">
+                        <van-button block round type="primary" class="btnSingle" bind:click="addFollowInfo">
+                            添加跟进记录
+                        </van-button>
+                    </view>
+                </van-cell-group>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer" wx:if="{{netStatus==''}}">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" color="#FA5151" bind:click="handleDelete">
+                删除
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="goEditProject">
+                编辑
+            </van-button>
+        </view>
+    </view>
+</view>

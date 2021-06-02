@@ -1,0 +1,89 @@
+{
+    "pages": [
+        "pages/home/index",
+        "pages/page/index",
+        "pages/menu/index",
+        "pages/mine/index",
+        "pages/menu/customer/myClients/index",
+        "pages/menu/customer/myClients/detailClient/index",
+        "pages/menu/customer/myClients/editClient/index",
+        "pages/menu/followerMultiple/index",
+        "pages/menu/customer/latentClient/index",
+        "pages/menu/customer/latentClient/detailClient/index",
+        "pages/menu/customer/latentClient/editClient/index",
+        "pages/menu/customer/visitClient/index",
+        "pages/menu/customer/visitClient/detailVisit/index",
+        "pages/menu/customer/contract/index",
+        "pages/menu/customer/contract/detailContract/index",
+        "pages/menu/customer/contract/editContract/index",
+        "pages/menu/customer/basicClients/index",
+        "pages/menu/sales/salesPlan/index",
+        "pages/menu/sales/salesPlan/editPlan/index",
+        "pages/menu/followerSingle/index",
+        "pages/menu/sales/salesPlan/detailPlan/index",
+        "pages/menu/sales/offerLetter/index",
+        "pages/menu/sales/task/index",
+        "pages/menu/sales/task/detailTask/index",
+        "pages/menu/sales/task/addSubtask/index",
+        "pages/menu/sales/task/editTask/index",
+        "pages/menu/sales/task/taskList/index",
+        "pages/menu/sales/task/detailSubtask/index",
+        "pages/menu/project/projectInfo/index",
+        "pages/menu/project/projectInfo/detailProject/index",
+        "pages/menu/project/projectInfo/detailProject/projectDetail/index",
+        "pages/menu/project/projectInfo/detailProject/addDetail/index",
+        "pages/menu/project/projectInfo/editProject/index",
+        "pages/menu/project/discountApplication/index",
+        "pages/menu/project/discountApplication/detailPage/detailBC/index",
+        "pages/menu/project/discountApplication/detailPage/detailDoor/index",
+        "pages/menu/project/discountVerification/index",
+        "pages/menu/project/discountVerification/detailInfo/index",
+        "pages/menu/project/discountVerification/detailOA/index",
+        "pages/menu/costManagement/reimbursement/index",
+        "pages/menu/costManagement/reimbursement/travelExpense/detailInfo/index",
+        "pages/menu/costManagement/reimbursement/invoiceInfo/index",
+        "pages/menu/costManagement/reimbursement/commercialExpense/index",
+        "pages/menu/costManagement/reimbursement/othersExpense/index",
+        "pages/menu/costManagement/reimbursement/absorbedCost/index",
+        "pages/login/index",
+        "components/getUserAuth/getUserAuth",
+        "pages/menu/customer/visitClient/addRecord/index",
+        "pages/mine/userInfoPreview/index"
+    ],
+    "tabBar": {
+        "color": "#222222",
+        "selectedColor": "#07C160",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/menu/index",
+                "text": "首页",
+                "selectedIconPath": "/images/menuSel.png",
+                "iconPath": "/images/menu.png"
+            },
+            {
+                "pagePath": "pages/mine/index",
+                "text": "我的",
+                "selectedIconPath": "/images/mineSel.png",
+                "iconPath": "/images/mine.png"
+            }
+        ]
+    },
+    "entryPagePath": "pages/login/index",
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#ffffff"
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
+    },
+    "usingComponents": {
+        "van-dialog": "@vant/weapp/dialog/index"
+    },
+    "sitemapLocation": "sitemap.json"
+}

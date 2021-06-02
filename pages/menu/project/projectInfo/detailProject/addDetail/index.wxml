@@ -1,0 +1,28 @@
+<view class="m-window m-addRecord m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <view class="ms-upload">
+                <view class="ms-inp">
+                    <van-field type="textarea" placeholder="请输入内容" model:value="{{content}}" input-class="descInput"
+                        error-message="{{errcontent}}" error-message-align="right">
+                    </van-field>
+                </view>
+                <view class="ms-photo">
+                    <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" multiple max-count="9"
+                        bind:delete="deleteImage" />
+                </view>
+            </view>
+            <view class="ms-location">
+                <van-cell title="{{lc}}" icon="location-o" is-link bind:click="location"></van-cell>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" bind:click="cancel">取消</van-button>
+            <van-button type="primary" size="normal" bind:click="saveRecord" class="btnRight">
+                添加
+            </van-button>
+        </view>
+    </view>
+</view>

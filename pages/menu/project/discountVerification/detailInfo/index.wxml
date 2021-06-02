@@ -1,0 +1,26 @@
+<!-- pages/menu/project/discountVerification/detailInfo/index.wxml -->
+<view class="m-window m-detailInfoDV m-flex">
+    <view class="m-header">
+    <scroll-view scroll-y>
+        <van-cell-group>
+            <van-cell title="客户编号" value="{{detail.kunnr}}" />
+            <van-cell title="客户名称" value="{{detail.clientName}}" />
+            <van-cell title="工程项目号" value="{{detail.project}}" />
+            <van-cell title="工程名称" value="{{detail.projectName}}" />
+            <van-cell title="核销金额" value="{{detail.zmoney}}" />
+        </van-cell-group>
+    </scroll-view>
+    </view>
+    <view class="de-title">特价申请记录明细</view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <van-cell-group>
+                <van-collapse accordion value="{{ activeNames }}" bind:change="onChange" custom-class="foldingPanel">
+                    <block wx:for="{{detail.sapSpecialOas}}" wx:key="index">
+                        <van-cell title="{{item.oaId}}" value="{{item.zmoney}}" is-link bindtap="goDetail" data-id="{{item.oaId}}" />
+                    </block>
+                </van-collapse>
+            </van-cell-group>
+        </scroll-view>
+    </view>
+</view>

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+      "van-search": "@vant/weapp/search/index",
+      "van-cell": "@vant/weapp/cell/index",
+      "van-cell-group": "@vant/weapp/cell-group/index",
+      "van-radio": "@vant/weapp/radio/index",
+      "van-radio-group": "@vant/weapp/radio-group/index"
+    },
+    "navigationBarTitleText": "选择客户"
+}

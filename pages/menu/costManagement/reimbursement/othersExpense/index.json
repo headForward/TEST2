@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+      "van-cell": "@vant/weapp/cell/index",
+      "van-cell-group": "@vant/weapp/cell-group/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-image": "@vant/weapp/image/index",
+      "van-steps": "@vant/weapp/steps/index",
+      "van-collapse": "@vant/weapp/collapse/index",
+      "van-collapse-item": "@vant/weapp/collapse-item/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-switch": "@vant/weapp/switch/index",
+      "van-panel": "@vant/weapp/panel/index",
+      "van-radio": "@vant/weapp/radio/index",
+      "van-radio-group": "@vant/weapp/radio-group/index"
+  },
+  "navigationBarTitleText": "其他费用直接付款"
+}

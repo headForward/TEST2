@@ -1,0 +1,5 @@
+<view>
+    <van-popup show="{{ isShow }}" position="bottom">
+        <van-picker columns="{{ columns }}" show-toolbar bind:cancel="onCancel" bind:confirm="onConfirm" />
+    </van-popup>
+</view>

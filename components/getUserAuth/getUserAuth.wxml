@@ -1,0 +1,17 @@
+<view class="mask" wx:if="{{isShow}}"></view>
+<view class="kuang" wx:if="{{isShow}}">
+    <view class="title">
+        <text>用户授权</text>
+    </view>
+    <view class="message">
+        <text>业务通请求获取您的用户信息</text>
+    </view>
+    <view class="btnWrapper">
+        <view class="btn calcel">
+            <button class="buttons" bindtap="cancel">拒绝</button>
+        </view>
+        <view class="btn allow">
+            <button class="buttons" bindtap="getUserInfo" plain>允许</button>
+        </view>
+    </view>
+</view>

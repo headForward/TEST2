@@ -1,0 +1,16 @@
+/* pages/menu/project/projectInfo/detailProject/addDetail/index.wxss */
+.ms-upload .ms-inp .descInput {
+    min-height: 100px !important;
+    font-size: 34rpx;
+  }
+  .ms-upload .ms-inp .van-cell::after {
+    border-bottom: none !important;
+  }
+  /* .ms-upload .ms-photo {
+    margin: 0 32rpx;
+    padding: 32rpx 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  } */
+  .ms-upload .ms-location .van-cell::after {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  }

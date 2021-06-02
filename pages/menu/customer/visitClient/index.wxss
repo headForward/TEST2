@@ -1,0 +1,7 @@
+/* pages/menu/customer/visitClient/index.wxss */
+.nav-btn {
+    height: 50px !important;
+    border: none !important;
+    font-size: 15px !important;
+  }
+  

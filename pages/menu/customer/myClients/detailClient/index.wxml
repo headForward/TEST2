@@ -1,0 +1,41 @@
+<!-- pages/menu/customer/myClients/clientDetail/index.wxml -->
+<view class="m-window m-clientDetail m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group title="客户信息">
+                    <van-cell title="名称" value="{{detailList.na}}" />
+                    <van-cell title="地址" value="{{detailList.provice+detailList.city+detailList.cty+detailList.address}}" />
+                    <van-cell title="来源" value="{{detailList.src}}" />
+                    <van-cell title="行业" value="{{detailList.industry}}" />
+                    <van-cell title="客户级别" value="{{detailList.lev}}" />
+                    <van-cell title="跟进人" value="{{detailList.followers}}" />
+                    <van-cell title="创建时间" value="{{detailList.createTime}}" />
+                </van-cell-group>
+                <van-cell-group wx:for="{{contactList}}" title="联系人信息{{index+1}}" wx:key="index">
+                    <van-cell title="名称" value="{{item.name}}" />
+                    <van-cell title="职务" value="{{item.job}}" wx:if="{{item.job}}" />
+                    <van-cell title="手机" value="{{item.mobilePhone}}" />
+                    <van-cell title="座机" value="{{item.telephone}}" wx:if="{{item.telephone}}" />
+                    <van-cell title="邮箱" value="{{item.email}}" wx:if="{{item.email}}" />
+                    <van-cell title="性别" value="{{item.mail==1?'男':'女'}}" />
+                    <van-cell title="备注" value="{{item.contactRemark}}" wx:if="{{item.contactRemark}}" />
+                    <view wx:if="{{item.url}}">
+                        <van-image width="200" height="200" src="{{item.url}}" bind:tap="handlePreview" fit="none" data-url="{{item.url}}" />
+                    </view>
+                </van-cell-group>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer" wx:if="{{netStatus==''}}">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" color="#FA5151" bind:click="handleDelete">
+                删除
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="goEditClient">
+                编辑
+            </van-button>
+        </view>
+    </view>
+</view>

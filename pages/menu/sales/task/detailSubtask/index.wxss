@@ -1,0 +1,4 @@
+.descInput {
+    min-height: 100px !important;
+    font-size: 34rpx !important;
+  }

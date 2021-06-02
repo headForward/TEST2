@@ -1,0 +1,24 @@
+<!-- pages/menu/costManagement/reimbursement/travelExpense/detailInfo/index.wxml -->
+<view class="m-window m-detailFee">
+    <scroll-view scroll-y>
+        <van-cell-group>
+            <van-cell title="日期" value="{{detail.feeDate}}" />
+            <van-cell title="地点" value="{{detail.businessTravelAddress}}" />
+            <van-cell title="出差事由" label="{{detail.businessTravelDetails}}" />
+        </van-cell-group>
+        <van-cell-group>
+            <view class="titleLinie">
+                <text class="de-title">费用合计</text>
+                <text class="de-val">{{currency+' '+detail.totalAmount}}</text>
+            </view>
+            <block wx:for="{{detail.nodesList}}" wx:key="index">
+                <van-cell title="{{item.feeTypeText}}" value="{{item.appliedAmount}}">
+                    <view slot="right-icon" class="icon-typ">
+                        <van-icon name="coupon-o" color="{{item.relPayInvoiceList.length?'#07C160':'inherit'}}"
+                            bind:tap="goInvoiceDetail" data-id="{{index}}" />
+                    </view>
+                </van-cell>
+            </block>
+        </van-cell-group>
+    </scroll-view>
+</view>

@@ -1,0 +1,34 @@
+<!-- pages/menu/customer/visitClient/addRecord/index.wxml -->
+<view class="m-window m-addRecord m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <van-cell-group>
+                <van-cell title="客户类型" value="{{type}}" is-link bind:tap="selectShow" />
+                <van-field label="客户名称" value="{{client.name}}" required readonly is-link bind:tap="selectClient" input-align="right" error-message="{{errna}}" error-message-align="right" />
+                <view class="ms-upload">
+                    <view class="ms-inp">
+                        <van-field type="textarea" placeholder="请输入内容(必填)" input-class="descInput" model:value="{{content}}" error-message="{{errcontent}}" error-message-align="right"></van-field>
+                    </view>
+                    <view class="ms-photo">
+                        <van-uploader file-list="{{ fileList }}" bind:after-read="fileUpload" bind:delete="fileDelete" multiple max-count="9" />
+                    </view>
+                </view>
+                <view class="ms-location">
+                    <van-cell title="{{location}}" icon="location-o" is-link bind:click="selectLocation" />
+                </view>
+            </van-cell-group>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" bind:click="onCancel">取消</van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="handleSave">
+                添加
+            </van-button>
+        </view>
+    </view>
+    <pickerPopup isShow="{{isShow}}" columns="{{columns}}" bind:onConfirm="onConfirm" />
+    <!-- <van-popup show="{{ isSelShow }}" position="bottom">
+        <van-picker columns="{{ columns }}" show-toolbar bind:cancel="selectShow" bind:confirm="onConfirm" />
+    </van-popup> -->
+</view>

@@ -1,0 +1,85 @@
+<!-- pages/menu/project/projectInfo/index.wxml -->
+<view class="m-window m-projectInfo m-flex">
+    <view class="m-header">
+        <view class="header-search">
+            <view class="header-inp">
+                <view class="inp">
+                    <van-search disabled="{{preventCtrl}}" model:value="{{ searchVal }}" placeholder="请输入搜索关键词"
+                        bind:search="onSearch" use-left-icon-slot="false" bind:focus="onFocus"
+                        bind:clear="handleClear" />
+                    <view class="inp-icon">
+                        <text class="iconfont icon-search"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="header-sort" bindtap="sortShow">
+                <text class="iconfont icon-sort"></text>
+            </view>
+            <view class="header-screen" bindtap="filterShow">
+                <text class="iconfont icon-filter"></text>
+            </view>
+        </view>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}"
+            bindrefresherrefresh="onRefresh" bindscrolltolower="onLoading">
+            <van-cell-group wx:if="{{netStatus==''}}" class="m-noDivider">
+                <block wx:for="{{projectList}}" wx:for-item="i" wx:key="index" wx:for-index="idx">
+                    <van-cell wx:for="{{i.a}}" wx:for-item="j" wx:key="title" title="{{j.prn}}" use-label-slot is-link
+                        bind:click="goDetailProject" data-gid="{{j.gid}}" data-idx="{{idx}}">
+                        <view slot="label">
+                            <view>工程项目号：{{j.projectNo}}</view>
+                            <view>工程大类：{{j.category}}</view>
+                            <view>工程造价：{{j.prcfmt}}</view>
+                            <view wx:if="{{j.startTime}}">开工日期：{{j.startTimefmt}}</view>
+                            <view>介入深度：{{j.depth}}</view>
+                        </view>
+                    </van-cell>
+                </block>
+            </van-cell-group>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer" hidden="{{preventCtrl}}">
+        <view class="btn">
+            <van-button block round type="primary" bind:click="goEditProject" class="btnSingle">
+                添加
+            </van-button>
+        </view>
+    </view>
+    <van-popup show="{{ isSortShow }}" bind:close="sortShow" position="top" custom-style="position: absolute;top: 50px;"
+        overlay-style="top: 50px">
+        <view class="m-sort">
+            <view class="sort-lines" wx:for="{{sortlist}}" wx:key="index" bindtap="sortClick" data-index='{{index}}'>
+                <view>{{item}}</view>
+                <van-icon name="success" size="20px" class="selected" wx:if="{{num == index}}" />
+            </view>
+        </view>
+    </van-popup>
+    <van-popup show="{{ isfilterShow }}" bind:close="filterShow" position="top"
+        custom-style="position: absolute;top: 50px;" overlay-style="top: 50px">
+        <view class="m-flex">
+            <view class="sortPanel">
+                <view wx:for="{{screen}}" class="sortPanelLine" wx:key='index'>
+                    <view class="lineTitle">{{item.title}}</view>
+                    <view class="lineConent">
+                        <view wx:for="{{item.content}}" wx:for-item="j" wx:for-index="i" wx:key='i' class="lc-column">
+                            <view class="lc-intems {{selecteds[index][i] == 1 ? 'green' : ''}}" bindtap='btnClick'
+                                data-index='{{index}}' data-i="{{i}}" data-content="{{j}}">
+                                {{j}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="btn">
+                <van-button plain type="primary" class="btnLeft" bind:click="handleReset">
+                    重置
+                </van-button>
+                <van-button type="primary" size="normal" class="btnRight" bind:click="handleFilter">
+                    确认
+                </van-button>
+            </view>
+        </view>
+    </van-popup>
+</view>

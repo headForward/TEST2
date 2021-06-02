@@ -1,0 +1,14 @@
+.descInput {
+    min-height: 100px !important;
+    font-size: 34rpx;
+  }
+  .m-scroll .contacts .contactsInfo {
+    position: absolute;
+    right: 32rpx;
+  }
+  .m-scroll .contacts .contactsInfo .infoAdd {
+    font-size: 28rpx;
+    color: #FA5151;
+    display: inline-block;
+    padding-top: 28rpx;
+  }

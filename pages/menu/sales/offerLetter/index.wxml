@@ -1,0 +1,31 @@
+<!-- pages/menu/sales/offerLetter/index.wxml -->
+<view class="m-window m-offerLetter m-flex">
+    <view class="m-header">
+        <view class="header-search">
+            <view class="header-inp">
+                <view class="inp">
+                    <van-search disabled="{{preventCtrl}}" model:value="{{ searchVal }}" placeholder="请输入搜索关键词" bind:search="onSearch" use-left-icon-slot="false" bind:focus="onFocus" bind:clear="handleClear" />
+                    <view class="inp-icon">
+                        <text class="iconfont icon-search"></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh" bindscrolltolower="onLoading">
+            <van-cell-group wx:if="{{netStatus==''}}" class="m-noDivider">
+                <block wx:for="{{fileList}}" wx:for-item="i" wx:key="index">
+                    <van-cell wx:for="{{i.a}}" wx:for-item="j" wx:key="attachmentName" title="{{j.attachmentName}}" bindtap="clickEvent" data-info="{{j}}" use-label-slot>
+                        <view slot="label">
+                            <view>上传时间：{{j.uploadDate}}</view>
+                            <view>类型：{{j.dataType}}</view>
+                            <view>文件大小：{{j.attachmentsize}}</view>
+                        </view>
+                    </van-cell>
+                </block>
+            </van-cell-group>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+</view>

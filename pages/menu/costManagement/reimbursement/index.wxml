@@ -1,0 +1,70 @@
+<!-- pages/menu/costManagement/reimbursement/index.wxml -->
+<view class="m-window m-reimbursement m-flex">
+    <view class="m-header">
+        <view class="header-search">
+            <view class="header-inp">
+                <van-tabs active="{{ active }}" bind:change="onTabChange" color="#07C160">
+                    <van-tab name='0' title="未提交({{saveStatusCount}})" />
+                    <van-tab name='1' title="审批中({{inApprovalStatusCount}})" />
+                    <van-tab name='2' title="已审批({{approvedStatusCount}})" />
+                    <van-tab name='-1' title="退回({{goBackStatusCount}})" />
+                </van-tabs>
+            </view>
+            <view class="header-screen" bindtap="filterShow">
+                <text class="iconfont icon-filter"></text>
+            </view>
+        </view>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}"
+            bindrefresherrefresh="onRefresh" bindscrolltolower="onLoading">
+            <van-cell-group wx:if="{{netStatus==''}}" class="m-noDivider">
+                <view class="costPanel" wx:for="{{costList}}" wx:for-item="i" wx:key="index" wx:for-index="idx">
+                    <van-cell wx:for="{{i}}" wx:for-item="j" wx:key="title"
+                        title="{{j.billTypeName+'-'+j.userName+'-'+j.payDate}}" is-link use-label-slot
+                        bind:tap="goDetail" data-type="{{j.billTypeName}}" data-id="{{j.id}}">
+                        <view slot="label">
+                            <view>报销理由：{{j.groupText||'无'}}</view>
+                            <view>报销金额：{{j.currency+" "+j.costAmount}}</view>
+                        </view>
+                    </van-cell>
+                </view>
+            </van-cell-group>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <van-popup show="{{ isfilterShow }}" bind:close="filterShow" position="top"
+        custom-style="position: absolute;top: 50px;" overlay-style="top: 50px">
+        <view class="m-flex">
+            <view>
+                <van-search model:value="{{ searchVal }}" placeholder="请输入单据编号" bind:search="onSearch"
+                    bind:focus="onFocus" bind:clear="handleClear" />
+            </view>
+            <view class="sortPanel">
+                <view wx:for="{{screen}}" class="sortPanelLine" wx:key='index'>
+                    <view class="lineTitle">{{item.title}}</view>
+                    <view class="lineConent">
+                        <view wx:for="{{item.content}}" wx:for-item="j" wx:for-index="i" wx:key='i'
+                            class="lc-column {{item.title == '单据日期' ? 'time' : ''}}">
+                            <view class="lc-intems {{selecteds[index][i] == 1 ? 'green' : ''}}" bindtap='btnClick'
+                                data-index='{{index}}' data-i="{{i}}" data-content="{{j}}">
+                                {{j}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="btn">
+                <van-button plain type="primary" class="btnLeft" bind:click="handleReset">
+                    重置
+                </van-button>
+                <van-button type="primary" size="normal" class="btnRight" bind:click="handleFilter">
+                    确认
+                </van-button>
+            </view>
+        </view>
+    </van-popup>
+    <van-calendar show="{{ isCalendarShow }}" type="range" allow-same-day bind:close="onClose" bind:confirm="onConfirm"
+        round="{{false}}" position="top" min-date="{{ minDate }}" max-date="{{ maxDate }}" default-date="{{currDate}}"
+        color="#07C160" />
+</view>

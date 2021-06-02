@@ -1,0 +1,60 @@
+<!-- pages/menu/sales/task/detailTask/index.wxml -->
+<view class="m-window m-taskDetail m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group class="m-noDivider">
+                    <van-cell title="{{detailList.tn}}" use-label-slot>
+                        <view slot="label" class="label">
+                            <view>{{detailList.dt}}</view>
+                            <view>负责人：{{detailList.ma}}</view>
+                            <view>任务成员：{{detailList.tmns}}</view>
+                            <view>截止日期：{{detailList.etfmt}}</view>
+                            <view>抄送：{{detailList.cmns}}</view>
+                            <view class="state">{{detailList.sta?'已完成':detailList.pr}}</view>
+                        </view>
+                    </van-cell>
+                </van-cell-group>
+                <view class="contacts">
+                    <view class="contactsInfo" bind:tap="addSubTask" wx:if="{{type != 'cm' && detailList.sta != 1}}">
+                        <text class="infoAdd">添加子任务</text>
+                    </view>
+                    <view>
+                        <van-cell-group title="子任务（{{detailList.sut.length}}）">
+                            <block wx:for="{{detailList.sut}}" wx:key="index">
+                                <van-cell title="{{item.stn}}" label="{{item.sma+'. '+item.setfmt+' 添加子任务 End'}}" bind:tap="goSubtaskDetail" data-idx="{{index}}" data-sts="{{item.sts}}">
+                                    <view slot="icon" catch:tap="handleStatusChange" data-sgid="{{item.sgid}}" data-idx="{{index}}" data-sts="{{item.sts}}" class="teilfragen">
+                                        <van-icon name="{{item.sts ? 'checked':'circle'}}" />
+                                    </view>
+                                </van-cell>
+                            </block>
+                        </van-cell-group>
+                    </view>
+                </view>
+                <view wx:if="{{type != 'cm'}}">
+                    <view class="btn" wx:if="{{detailList.sta}}">
+                        <van-button block round type="primary" class="btnSingle" bind:click="changeStatus">
+                            转为未完成
+                        </van-button>
+                    </view>
+                    <view class="btn" wx:else>
+                        <van-button block round type="primary" class="btnSingle" bind:click="handleFinish">
+                            完成任务
+                        </van-button>
+                    </view>
+                </view>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer" wx:if="{{type != 'cm'&&netStatus==''}}">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" color="#FA5151" bind:click="handleDelete">
+                删除
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="goEditTask">
+                编辑
+            </van-button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,50 @@
+<!-- pages/menu/sales/salesPlan/index.wxml -->
+<view class="m-window m-salesPlan m-flex">
+    <view class="m-header">
+        <van-dropdown-menu>
+            <van-dropdown-item model:value="{{ year }}" options="{{ yearList }}" bind:change="onRefresh" />
+            <van-dropdown-item model:value="{{ planType }}" options="{{ typeList }}" bind:change="onRefresh" />
+            <!-- <van-dropdown-item disabled="{{preventCtrl}}" id="owner" title="{{ owner }}" class="m-sort"> -->
+                <van-dropdown-item id="owner" title="{{ owner }}" class="m-sort">
+                <view class="sort-lines" bindtap="sortClick" data-index="1">
+                    <view>全部成员</view>
+                    <van-icon name="success" size="20px" class="selected" wx:if="{{num == 1}}" />
+                </view>
+                <view class="sort-lines" bindtap="sortClick" data-index="2">
+                    <view>我的</view>
+                    <van-icon name="success" size="20px" class="selected" wx:if="{{num == 2}}" />
+                </view>
+                <view class="sort-lines" bindtap="ownerClick" data-index="3">
+                    <view>{{fer.follower != undefined ? '选择下属('+fer.follower+')' : '选择下属'}}</view>
+                    <van-icon name="success" size="20px" class="selected" wx:if="{{num == 3}}" />
+                </view>
+            </van-dropdown-item>
+        </van-dropdown-menu>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh" bindscrolltolower="onLoading">
+            <van-cell-group wx:if="{{netStatus==''}}" class="m-noDivider">
+                <block wx:for="{{planList}}" wx:for-item="i" wx:key="index" wx:for-index="idx">
+                    <van-cell wx:for="{{i.a}}" wx:for-item="j" wx:key="index" title="{{j.year+'年'+j.cycle}}" use-label-slot data-gid="{{j.gid}}" bind:click="goDetailPlan" data-idx="{{idx}}" is-link>
+                        <view slot="label">
+                            <view>区域：{{j.area}}</view>
+                            <view>归属人：{{j.ower}}</view>
+                            <view>更新时间：{{j.updateTime}}</view>
+                            <view>完成率：{{j.rate}}</view>
+                            <view wx:if="{{j.finishtotal}}">完成金额：{{j.finishtotal}}</view>
+                            <view>计划金额：{{j.plantotal}}</view>
+                        </view>
+                    </van-cell>
+                </block>
+            </van-cell-group>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button block round type="primary" bind:click="goEditPlan" class="btnSingle">
+                添加
+            </van-button>
+        </view>
+    </view>
+</view>

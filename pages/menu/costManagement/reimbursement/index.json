@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+      "van-cell": "@vant/weapp/cell/index",
+      "van-cell-group": "@vant/weapp/cell-group/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-search": "@vant/weapp/search/index",
+      "van-popup": "@vant/weapp/popup/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-tab": "@vant/weapp/tab/index",
+      "van-tabs": "@vant/weapp/tabs/index",
+      "van-calendar": "@vant/weapp/calendar/index"
+  },
+  "navigationBarTitleText": "报销单"
+}

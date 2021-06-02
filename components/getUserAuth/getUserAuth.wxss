@@ -1,0 +1,70 @@
+.mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0rpx;
+    left: 0rpx;
+    background: #000;
+    opacity: 0.4;
+    z-index: 110;
+  }
+  .kuang {
+    width: 80%;
+    height: auto;
+    border-radius: 16rpx;
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 120;
+  }
+  .kuang .title {
+    width: 100%;
+    text-align: center;
+    font-size: 34rpx;
+    color: #000;
+    font-weight: 500;
+    margin: 64rpx 0;
+  }
+  .kuang .message {
+    width: 83%;
+    margin: 32px auto;
+    height: auto;
+    text-align: center;
+    font-size: 34rpx;
+    color: #5f5f5f;
+  }
+  /* .kuang image {
+    width: 120rpx;
+    height: 120rpx;
+    display: block;
+    margin: 10rpx auto;
+  } */
+  .kuang .btnWrapper {
+    width: 100%;
+    display: flex;
+    border-top: 2rpx solid rgba(0, 0, 0, 0.1);
+  }
+  .kuang .btnWrapper .btn {
+    flex: 1;
+  }
+  .kuang .btnWrapper .btn.calcel {
+    border-right: 2rpx solid rgba(0, 0, 0, 0.1);
+  }
+  .kuang .btnWrapper .btn.allow .buttons {
+    color: #576B95;
+  }
+  .kuang .btnWrapper .btn .buttons {
+    font-size: 34rpx;
+    color: #000;
+    font-weight: 500;
+    padding: 0;
+    border: 0;
+    background: #fff;
+    padding: 10rpx 0;
+  }
+  .kuang .btnWrapper .btn .buttons::after {
+    border: 0;
+  }
+  

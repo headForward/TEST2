@@ -1,0 +1,59 @@
+<!-- pages/menu/project/discountVerification/index.wxml -->
+<view class="m-window m-discVerification m-flex">
+    <view class="m-header">
+        <view class="header-search">
+            <view class="header-inp">
+                <view class="inp">
+                    <van-search disabled="{{preventCtrl}}" model:value="{{ searchVal }}" placeholder="在当前数据中搜索" bind:search="onSearch" use-left-icon-slot="false" bind:focus="onFocus" bind:clear="handleClear" />
+                    <view class="inp-icon">
+                        <text class="iconfont icon-search"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="header-screen" bindtap="filterShow">
+                <text class="iconfont icon-filter"></text>
+            </view>
+        </view>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <van-cell-group wx:if="{{netStatus==''}}">
+                <van-collapse accordion value="{{ activeName }}" bind:change="onChange" custom-class="foldingPanel">
+                    <block wx:for="{{list}}" wx:for-item="i" wx:key="index" wx:for-index="idx">
+                        <van-collapse-item title="{{i.clientName}}" value="{{i.zmoney}}" name="{{i.clientName}}">
+                            <view class="fold">
+                                <van-cell wx:for="{{i.sapSpecialProjects}}" wx:key="index" title="{{item.projectName}}" value="{{item.zmoney}}" is-link bindtap="goDetail" data-id="{{item.project}}" />
+                            </view>
+                        </van-collapse-item>
+                    </block>
+                </van-collapse>
+            </van-cell-group>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <van-popup show="{{ isfilterShow }}" bind:close="filterShow" position="top" custom-style="position: absolute;top: 50px;" overlay-style="top: 50px">
+        <view class="m-flex">
+            <view class="sortPanel">
+                <view wx:for="{{screen}}" class="sortPanelLine" wx:key='index'>
+                    <view class="lineTitle">{{item.title}}</view>
+                    <view class="lineConent">
+                        <view wx:for="{{item.content}}" wx:for-item="j" wx:for-index="i" wx:key='i' class="lc-column {{item.title == '自定义查询' ? 'time' : ''}}">
+                            <view class="lc-intems {{selecteds[index][i] == 1 ? 'green' : ''}}" bindtap='btnClick' data-index='{{index}}' data-i="{{i}}" data-content="{{j}}">
+                                {{j}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="btn">
+                <van-button plain type="primary" class="btnLeft" bind:click="handleReset">
+                    重置
+                </van-button>
+                <van-button type="primary" size="normal" class="btnRight" bind:click="handleFilter">
+                    确认
+                </van-button>
+            </view>
+        </view>
+    </van-popup>
+    <van-calendar show="{{ isCalendarShow }}" type="range" allow-same-day bind:close="onClose" bind:confirm="onConfirm" round="{{false}}" position="top" min-date="{{ minDate }}" max-date="{{ maxDate }}" default-date="{{currDate}}" color="#07C160" />
+</view>

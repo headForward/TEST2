@@ -1,0 +1,15 @@
+{
+  "usingComponents": {
+      "van-cell-group": "@vant/weapp/cell-group/index",
+      "van-cell": "@vant/weapp/cell/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-field": "@vant/weapp/field/index",
+      "van-picker": "@vant/weapp/picker/index",
+      "van-popup": "@vant/weapp/popup/index",
+      "van-area": "@vant/weapp/area/index",
+      "van-calendar": "@vant/weapp/calendar/index",
+      "pickerPopup":"/components/pickerPopup",
+      "van-uploader": "@vant/weapp/uploader/index"
+  },
+  "navigationBarTitleText": "编辑工程项目"
+}

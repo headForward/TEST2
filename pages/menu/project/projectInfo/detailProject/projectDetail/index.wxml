@@ -1,0 +1,22 @@
+<view class="m-window m-detailProject m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <van-cell-group>
+                <van-cell title="客户名称" value="{{projectName}}" />
+                <van-cell title="创建时间" value="{{followList.ct}}" />
+                <van-cell title="跟进人" value="{{followList.fer}}" />
+                <van-cell title="跟进内容" label="{{followList.cont}}" />
+                <van-cell title="位置" value="{{followList.lc==''?'无':followList.lc}}" is-link="{{followList.lc !== ''}}"
+                    bind:tap="locationMap" />
+            </van-cell-group>
+            <view wx:if="{{url.length>0}}">
+                <van-cell-group title="跟进图片">
+                    <block wx:for="{{url}}" wx:key="index">
+                        <van-image width="100" height="100" src="{{item}}" bind:tap="handlePreview"
+                            data-url="{{item}}" />
+                    </block>
+                </van-cell-group>
+            </view>
+        </scroll-view>
+    </view>
+</view>

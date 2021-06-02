@@ -1,0 +1,7 @@
+<!--components/datePickerPopup/index.wxml-->
+<view>
+    <van-popup show="{{ isShow }}" position="bottom">
+        <van-datetime-picker type="{{pickerType}}" value="{{ currentDate }}" min-date="{{ minDate }}" bind:confirm="onConfirm"
+            max-date="{{maxDate}}" bind:cancel="onCancel" formatter="{{ formatter }}" />
+    </van-popup>
+</view>

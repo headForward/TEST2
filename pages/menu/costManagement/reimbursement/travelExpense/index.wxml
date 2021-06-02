@@ -1,0 +1,50 @@
+<!-- pages/menu/costManagement/travelExpense/index.wxml -->
+<view class="m-window m-travelExpense m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group>
+                    <van-cell title="报销单编号" value="{{detail.payNo}}" />
+                    <van-cell title="报销人" value="{{detail.supplierName}}" />
+                    <van-cell title="填报日期" value="{{detail.payDate}}" />
+                    <van-cell title="报销账号" value="{{detail.account}}" />
+                    <van-cell title="成本中心" value="{{detail.costCenter+'-'+detail.costCenterName}}" />
+                    <van-cell title="部门" value="{{detail.deptName}}" />
+                    <van-cell title="固定费用">
+                        <van-switch checked="{{ checked }}" size="17px" active-color="#07C160" />
+                    </van-cell>
+                    <van-cell title="出差事由" value="{{detail.remark}}" />
+                    <van-cell title="日期">
+                        <view>{{detail.startDate+'-'+detail.endDate}}</view>
+                        <view>共{{days}}天</view>
+                    </van-cell>
+                </van-cell-group>
+                <van-cell-group>
+                    <van-cell title="付款方式" value="{{detail.payWayName}}" />
+                    <van-cell value="{{detail.currency+' '+detail.costAmount}}">
+                        <view slot="title" class="icon-typ">
+                            <text class="van-cell-text">报销总额</text>
+                            <van-icon name="cluster-o" color="{{detail.apportion?'#07C160':'inherit'}}" bind:tap="goDetail" />
+                        </view>
+                    </van-cell>
+                </van-cell-group>
+                <view class="contacts">
+                    <block wx:for="{{detail.nodesNoteList}}" wx:key="index">
+                        <view class="contactsInfo" data-id="{{index}}" bind:tap="goDetailInfo">
+                            <text class="infoAdd infoView">查看</text>
+                        </view>
+                        <van-cell-group title="报销明细{{index+1}}" wx:key="index">
+                            <van-cell title="日期" value="{{item.feeDate}}" />
+                            <van-cell title="出差详情" label="{{item.businessTravelDetails}}" />
+                            <van-cell title="费用合计" value="{{item.totalAmount}}" />
+                        </van-cell-group>
+                    </block>
+                </view>
+                <van-cell-group title="审批历史" wx:if="{{detail.oaStatus != 0}}">
+                    <van-steps steps="{{ logs }}" active="{{ active }}" direction="vertical" />
+                </van-cell-group>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+</view>

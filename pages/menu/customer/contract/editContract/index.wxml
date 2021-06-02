@@ -1,0 +1,34 @@
+<!-- pages/menu/customer/contract/editContract/index.wxml -->
+<view class="m-window m-editContract m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <view class="users">
+                <van-cell-group title="合同信息">
+                    <van-field label="合同标题" value="{{detailList.ct}}" placeholder="请输入合同标题" required bind:blur="handleChange" data-label="ct" input-align="right" error-message="{{errct}}" error-message-align="right" />
+                    <van-field label="合同编号" value="{{detailList.cno}}" readonly input-align="right" />
+                    <van-field label="合同总量" value="{{detailList.amountfmt}}" required input-align="right" placeholder="请输入合同总量" bind:focus="onFocus" bind:change="handleInput" bind:blur="handleAmountChange" data-label="amountfmt" error-message="{{erramount}}" error-message-align="right" maxlength="{{numLen}}" />
+                </van-cell-group>
+            </view>
+            <view class="users">
+                <van-cell-group>
+                    <van-field label="客户名称" value="{{detailList.cn}}" is-link="{{!isEdit}}" readonly required input-align="right" bind:tap="selectClient" error-message="{{errcn}}" error-message-align="right" />
+                    <van-field label="开始日期" value="{{detailList.btfmt}}" is-link readonly required input-align="right" bind:tap="selectShow" data-label="bt" error-message="{{errbtfmt}}" error-message-align="right" />
+                    <van-field label="截止日期" value="{{detailList.etfmt}}" is-link readonly required input-align="right" bind:tap="selectShow" data-label="et" error-message="{{erretfmt}}" error-message-align="right" />
+                    <van-field label="合同备注" value="{{detailList.rm}}" type="textarea" autosize placeholder="输入备注" bind:blur="handleChange" data-label="rm" maxlength="{{80}}" />
+                </van-cell-group>
+            </view>
+            <view class="ms-photo">
+                <van-uploader file-list="{{ fileList }}" bind:after-read="fileUpload" bind:delete="fileDelete" multiple max-count="9" />
+            </view>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" bind:click="onCancel">取消</van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="handleSave">
+                保存
+            </van-button>
+        </view>
+    </view>
+    <van-calendar show="{{ calendarShow }}" bind:close="onCalendarCancel" bind:confirm="onCalendarConfirm" min-date="{{ minDate }}" max-date="{{ maxDate }}" default-date="{{currDate}}" color="#07C160" />
+</view>

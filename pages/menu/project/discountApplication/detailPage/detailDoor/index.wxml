@@ -1,0 +1,65 @@
+<!-- pages/menu/project/discountApplication/detailPage/detailDoor/index.wxml -->
+<view class="m-window m-detailDoor m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <van-cell-group title="基本信息" wx:for="{{main}}" wx:key="index">
+                <van-cell title="标题" value="{{item.requestname}}" />
+                <van-cell title="申请日期" value="{{item.ApplyDate}}" />
+                <van-cell title="流程编号" value="{{item.Num}}" />
+                <van-cell title="紧急程度" value="{{item.requestlevel}}" />
+                <van-cell title="首次申请" value="{{item.isFirsttime||item.Firsttime}}" />
+                <van-cell title="申请原因" value="{{item.Maturity}}" />
+                <van-cell title="所在部门" value="{{item.Dep}}" />
+                <van-cell title="申请人姓名" value="{{item.UserName}}" />
+                <van-cell title="申请人手机" value="{{item.UserTel}}" />
+                <van-cell title="直属上级" value="{{item.UserManager}}" />
+                <van-cell title="一级经销商" value="{{item.Dealer}}" />
+                <van-cell title="经销商性质" value="{{item.DealerNature}}" />
+                <van-cell title="签订合同方式" value="{{item.ConType}}" />
+                <van-cell title="工程项目" value="{{item.Project}}" />
+                <van-cell title="挂账公司" value="{{costName}}" />
+                <van-cell wx:if="{{item.costcenter!=''&&costList.length>1}}" title="费用承担公司" value="{{item.costcenter}}" />
+                <van-cell title="开票公司" value="{{item.ComName}}" />
+                <van-cell title="申请陈述" use-label-slot>
+                    <view slot="label">
+                        <rich-text nodes="{{item.Reason}}" />
+                    </view>
+                </van-cell>
+                <van-cell title="预计合同价使用量(万元)" value="{{item.ExpectedProjectQuantity}}" />
+                <van-cell title="特价使用量(万元)" value="{{item.SpecialUsage}}" />
+                <van-cell title="累计申请工程合同使用量(万元)" value="{{item.ProjectQuantity}}" />
+                <van-cell title="累计申请特价使用量(万元)" value="{{item.SlaeQuantity}}" />
+                <van-cell title="延续性合同增加使用量(万元)" value="{{item.ContinueProjectQuantity}}" />
+                <van-cell title="延续性合同特价使用量(万元)" value="{{item.ContinueSlaeQuantity}}" />
+            </van-cell-group>
+            <van-cell-group title="具体明细">
+                <van-collapse value="{{ activeName }}" bind:change="onChange" custom-class="foldingPanel">
+                    <block wx:for="{{detail}}" wx:key="index" wx:for-item="i">
+                        <block wx:for="{{i.a}}" wx:key="index" wx:for-item="j" wx:for-index="idx">
+                            <van-collapse-item accordion>
+                                <view slot="title">
+                                    <rich-text nodes="{{j.ProductName}}" />
+                                </view>
+                                <view class="fold">
+                                    <van-cell title="现执行价格" value="{{j.NowPrice}}" />
+                                    <van-cell title="合同价格" value="{{j.ConPrice}}" />
+                                    <van-cell title="申请特价" value="{{j.ApplyPrice}}" />
+                                    <van-cell title="核后特价" value="{{j.AuditPrice}}" />
+                                    <van-cell title="供货周期" value="{{j.SupplyCycle}}" />
+                                </view>
+                            </van-collapse-item>
+                        </block>
+                    </block>
+                </van-collapse>
+            </van-cell-group>
+            <!-- <van-cell-group title="附件信息">
+                <block wx:for="{{urls}}" wx:key="{{index}}">
+                    <van-image width="100" height="100" src="{{item}}" data-url="{{item}}" bindtap="handlePreview" />
+                </block>
+            </van-cell-group> -->
+            <van-cell-group title="审批历史">
+                <van-steps steps="{{ logs }}" active="{{ active }}" direction="vertical" />
+            </van-cell-group>
+        </scroll-view>
+    </view>
+</view>

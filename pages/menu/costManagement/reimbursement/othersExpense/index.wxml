@@ -1,0 +1,68 @@
+<!-- pages/menu/costManagement/reimbursement/othersExpense/index.wxml -->
+<view class="m-window m-othersExpense m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}"
+            bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group>
+                    <van-cell title="报销单编号" value="{{detail.payNo}}" />
+                    <van-cell title="申请人" value="{{detail.userName}}" />
+                    <van-cell title="申请日期" value="{{detail.payDate}}" />
+                    <van-cell title="成本中心" value="{{detail.costCenter+'-'+detail.costCenterName}}" />
+                    <van-cell title="部门" value="{{detail.deptName}}" />
+                    <van-cell title="付款单位" value="{{detail.companyName}}" />
+                </van-cell-group>
+                <van-cell-group>
+                    <van-cell title="费用类型" value="{{detail.feeTypeText}}" />
+                    <van-cell title="计提">
+                        <van-switch checked="{{ detail.provision==1 }}" size="17px" active-color="#07C160" />
+                    </van-cell>
+                    <van-cell title="费用日期" value="{{detail.payDate}}" />
+                    <van-cell value="{{detail.currency+' '+detail.costAmount}}">
+                        <view slot="title" class="icon-typ">
+                            <text class="van-cell-text">付款金额</text>
+                            <van-icon name="coupon-o" color="{{detail.invoice?'#07C160':'inherit'}}"
+                                bind:tap="goInvoiceDetail" />
+                            <van-icon name="cluster-o" color="{{detail.apportion?'#07C160':'inherit'}}"
+                                bind:tap="goDetail" />
+                        </view>
+                    </van-cell>
+                    <van-cell title="付款类型" value="{{detail.payTypeName}}" />
+                    <van-cell title="付款方式" value="{{detail.payWayName}}" />
+                    <van-cell title="申请类型">
+                        <van-radio-group value="{{ detail.payObject }}" class="geschlecht">
+                            <van-radio name="{{2}}" checked-color="#07c160">员工</van-radio>
+                            <van-radio name="{{1}}" checked-color="#07c160">供应商</van-radio>
+                        </van-radio-group>
+                    </van-cell>
+                    <van-cell title="申请对象" value="{{detail.supplierName}}" />
+                </van-cell-group>
+                <van-cell-group>
+                    <van-panel title="银行账号" status="{{detail.account}}">
+                        <view class="accpanel tipps">
+                            <view>{{detail.bankName}}</view>
+                            <view>代码{{detail.bankCode}}</view>
+                        </view>
+                    </van-panel>
+                </van-cell-group>
+                <van-cell-group>
+                    <van-cell title="项目名称" value="{{detail.projectName}}" />
+                    <van-cell title="项目编号" value="{{detail.projectNo}}" />
+                </van-cell-group>
+                <van-cell-group>
+                    <van-cell title="费用返还">
+                        <van-switch checked="{{ detail.restitution==1 }}" size="17px" active-color="#07C160" />
+                    </van-cell>
+                    <van-cell wx:if="{{detail.restitution}}" title="返还金额" value="{{detail.restitutionMoney}}" />
+                </van-cell-group>
+                <van-cell-group>
+                    <van-cell title="备注" label="{{detail.remark}}" />
+                </van-cell-group>
+                <van-cell-group title="审批历史" wx:if="{{detail.oaStatus != 0}}">
+                    <van-steps steps="{{ logs }}" active="{{ active }}" direction="vertical" />
+                </van-cell-group>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+</view>

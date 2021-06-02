@@ -1,0 +1,8 @@
+/* pages/menu/sales/task/addSubtask/index.wxss */
+.ms-inp .descInput {
+    min-height: 100px !important;
+    font-size: 34rpx;
+  }
+  .ms-inp .van-cell::after {
+    border-bottom: none !important;
+  }

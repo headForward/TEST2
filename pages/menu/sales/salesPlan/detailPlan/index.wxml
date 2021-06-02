@@ -1,0 +1,35 @@
+<!-- pages/menu/sales/salesPlan/planDetail/index.wxml -->
+<view class="m-window m-planDetail m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group title="计划信息">
+                    <van-cell title="计划年份" value="{{detailList.year+'年'}}" />
+                    <van-cell title="区域" value="{{detailList.area}}" />
+                    <van-cell title="计划类型" value="{{detailList.planType}}" />
+                    <van-cell title="计划周期" value="{{detailList.cycle}}" />
+                    <van-cell title="计划总额" value="{{detailList.plantotalfmt}}" />
+                    <van-cell title="完成总额" value="{{detailList.finishtotalfmt}}" is-link="{{addPermission && same}}" bind:click="goPlanInfo" />
+                    <van-cell title="完成率" value="{{detailList.rate}}" />
+                    <van-cell title="归属人" value="{{detailList.ower}}" />
+                </van-cell-group>
+                <van-cell-group wx:for="{{detailList.detail}}" title="分类信息{{index+1}}" wx:key="index">
+                    <van-cell title="分类名称" value="{{item.name}}" />
+                    <van-cell title="计划金额" value="{{item.planfmt}}" />
+                    <van-cell title="完成金额" value="{{item.finfmt}}" />
+                </van-cell-group>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer" wx:if="{{addPermission&&netStatus==''}}">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" color="#FA5151" bind:click="handleDelete">
+                删除
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="goEditPlan">
+                编辑
+            </van-button>
+        </view>
+    </view>
+</view>

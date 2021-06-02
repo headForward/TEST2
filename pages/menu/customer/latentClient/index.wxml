@@ -1,0 +1,69 @@
+<view class="m-window m-myClients m-flex">
+    <view class="m-header">
+        <view class="header-search">
+            <view class="header-inp">
+                <view class="inp">
+                    <van-search disabled="{{preventCtrl}}" model:value="{{ searchVal }}" placeholder="请输入搜索关键词" bind:search="onSearch" use-left-icon-slot="false" bind:focus="onFocus" bind:clear="handleClear" />
+                    <view class="inp-icon">
+                        <text class="iconfont icon-search"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="header-sort" bindtap="sortShow1">
+                <text class="iconfont icon-sort"></text>
+            </view>
+            <view class="header-screen" bindtap="sortShow2">
+                <text class="iconfont icon-filter"></text>
+            </view>
+        </view>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh" bindscrolltolower="onLoading">
+            <van-cell-group wx:if="{{netStatus==''}}" class="m-noDivider">
+                <block wx:for="{{clientList}}" wx:for-item="i" wx:key="index" wx:for-index="idx">
+                    <van-cell wx:for="{{i.a}}" wx:for-item="j" wx:key="title" title="{{j.title}}" label="最后跟进时间：{{j.desc}}" is-link bind:click="goDetailClient" data-gid="{{j.gid}}" data-idx="{{idx}}" />
+                </block>
+            </van-cell-group>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer" hidden="{{preventCtrl}}">
+        <view class="btn">
+            <van-button block round type="primary" bind:click="goEditClient" class="btnSingle">
+                添加
+            </van-button>
+        </view>
+    </view>
+    <van-popup show="{{ isSortShow1 }}" bind:close="sortShow1" position="top" custom-style="position: absolute;top: 50px;" overlay-style="top: 50px">
+        <view class="m-sort">
+            <view class="sort-lines" wx:for="{{sortlist}}" wx:key="index" bindtap="sortClick" data-index='{{index}}'>
+                <view>{{item}}</view>
+                <van-icon name="success" size="20px" class="selected" wx:if="{{num == index}}" />
+            </view>
+        </view>
+    </van-popup>
+    <van-popup show="{{ isSortShow2 }}" bind:close="sortShow2" position="top" custom-style="position: absolute;top: 50px;" overlay-style="top: 50px">
+        <view class="m-flex">
+            <view class="sortPanel">
+                <view wx:for="{{screen}}" class="sortPanelLine" wx:key='index'>
+                    <view class="lineTitle">{{item.title}}</view>
+                    <view class="lineConent">
+                        <view wx:for="{{item.content}}" wx:for-item="j" wx:for-index="i" wx:key='i' class="lc-column">
+                            <view class="lc-intems {{selecteds[index][i] == 1 ? 'green' : ''}}" bindtap='btnClick' data-index='{{index}}' data-i="{{i}}" data-content="{{j}}">
+                                {{j}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="btn">
+                <van-button plain type="primary" class="btnLeft" bind:click="handleReset">
+                    重置
+                </van-button>
+                <van-button type="primary" size="normal" class="btnRight" bind:click="handleFilter">
+                    确认
+                </van-button>
+            </view>
+        </view>
+    </van-popup>
+</view>

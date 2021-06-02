@@ -1,0 +1,8 @@
+.ms-upload .ms-inp .descInput {
+    min-height: 100px !important;
+    font-size: 34rpx;
+  }
+  .ms-upload .ms-inp .van-cell::after {
+    border-bottom: none !important;
+  }
+  

@@ -1,0 +1,31 @@
+<!-- pages/menu/customer/basicClients/index.wxml -->
+<view class="m-window m-basicClients m-flex">
+    <view class="m-header">
+        <view class="header-search">
+            <view class="header-inp">
+                <view class="inp">
+                    <van-search model:value="{{ searchVal }}" placeholder="请输入客户名称" bind:change="onSearch" use-left-icon-slot="false" />
+                    <view class="inp-icon">
+                        <text class="iconfont icon-search"></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" bindscrolltolower="onLoading">
+            <van-cell-group wx:if="{{netStatus==''}}" class="m-noDivider">
+                <block wx:for="{{clientList}}" wx:for-item="i" wx:key="index">
+                    <van-cell wx:for="{{i.a}}" wx:for-item="j" wx:key="title">
+                        <van-radio-group value="{{ val }}" bind:change="onChange">
+                            <van-radio name="{{j.id}}" checked-color="#07c160" shape="square">
+                                {{j.cn}}
+                            </van-radio>
+                        </van-radio-group>
+                    </van-cell>
+                </block>
+            </van-cell-group>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+</view>

@@ -1,0 +1,5 @@
+<view>
+  <view>主页</view>
+  <button bindtap="getuserprofile">测试</button>
+  <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">getUserinfo</button>
+</view>

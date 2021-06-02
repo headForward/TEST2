@@ -1,0 +1,17 @@
+<!-- pages/menu/costManagement/absorbedCost/index.wxml -->
+<view class="m-window m-absorbedCost">
+    <view class="m-middle">
+        <van-cell-group>
+            <van-cell title="报销人" value="{{applicant}}" />
+            <van-cell title="填报日期" value="{{applyDate}}" />
+            <van-cell title="出差事由" value="{{reason}}" />
+            <van-cell title="随同公司职员" value="{{staff}}" />
+            <van-cell title="报销总额" value="{{totalAmount}}" />
+        </van-cell-group>
+        <van-cell-group title="分摊明细{{index+1}}" wx:for="{{detail}}" wx:key="index">
+            <van-cell title="分摊部门" value="{{item.deptName}}" />
+            <van-cell title="分摊员工" value="{{item.apportionName}}" />
+            <van-cell title="分摊金额" value="{{item.apportionAmount}}" />
+        </van-cell-group>
+    </view>
+</view>

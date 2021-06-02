@@ -1,0 +1,45 @@
+<!-- pages/menu/customer/contract/detailContract/index.wxml -->
+<view class="m-window m-detailContract m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll" refresher-enabled scroll-anchoring refresher-triggered="{{loading}}" bindrefresherrefresh="onRefresh">
+            <block wx:if="{{netStatus==''}}">
+                <van-cell-group title="合同信息">
+                    <van-cell title="合同标题" value="{{detailList.ct}}" />
+                    <van-cell title="合同编号" value="{{detailList.cno}}" />
+                    <van-cell title="合同总量" value="{{detailList.amountfmt}}" />
+                    <van-cell title="币种" value="{{detailList.currency}}" />
+                    <van-cell title="客户名称" value="{{detailList.cn}}" />
+                    <van-cell title="开始日期" value="{{detailList.btfmt}}" />
+                    <van-cell title="截止日期" value="{{detailList.etfmt}}" />
+                    <van-cell title="完成量" value="{{detailList.completion}}" />
+                    <van-cell title="完成率" value="{{detailList.completed}}" />
+                    <van-cell wx:if="{{detailList.ls}}" title="合同状态" value="已作废" />
+                    <van-cell wx:if="{{detailList.ls}}" title="作废原因" label="{{detailList.rs}}" />
+                    <van-cell title="合同备注" label="{{detailList.rm}}" />
+                </van-cell-group>
+                <block wx:for="{{urls}}" wx:key="index">
+                    <van-image width="100" height="100" src="{{item}}" bind:tap="handlePreview" data-url="{{item}}" />
+                </block>
+            </block>
+            <my-empty wx:else image="{{errImg}}" description="{{netStatus}}" />
+        </scroll-view>
+    </view>
+    <view class="m-footer" wx:if="{{netStatus==''}}">
+        <view class="btn" wx:if="{{!detailList.ls}}">
+            <van-button plain type="primary" class="btnLeft" color="#FA5151" bind:click="handleCancle">
+                作废
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="goEditContract">
+                编辑
+            </van-button>
+        </view>
+        <view class="btn" wx:else>
+            <van-button plain type="primary" class="btnLeft" color="#FA5151" bind:click="handleDelete">
+                删除
+            </van-button>
+        </view>
+    </view>
+    <van-dialog use-slot title="{{title}}" show="{{ dialogShow }}" show-cancel-button bind:close="onClose" bind:confirm="handleConfirm" beforeClose="{{beforeClose}}">
+        <van-field type="textarea" placeholder="请输入理由（不超过50字）" model:value="{{rs}}" placeholder-style="{{err}}"></van-field>
+    </van-dialog>
+</view>

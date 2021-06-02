@@ -1,0 +1,51 @@
+<!-- pages/menu/sales/task/editTask/index.wxml -->
+<view class="m-window m-editTask m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <view>
+                <van-cell-group>
+                    <van-field label="标题" placeholder="输入任务标题" model:value="{{tn}}" required input-align="right"
+                        error-message="{{errtn}}" error-message-align="right" />
+                    <van-field type="textarea" placeholder="输入任务内容（必填，不超过120字）" model:value="{{cont}}"
+                        maxlength="{{120}}" error-message="{{errcont}}" error-message-align="right" />
+                </van-cell-group>
+            </view>
+            <view>
+                <van-cell-group>
+                    <van-field label="任务成员" value="{{tmn}}" required is-link readonly bind:tap="goSelectMe"
+                        input-align="right" error-message="{{errtmn}}" error-message-align="right" />
+                    <van-field wx:if="{{tm.length>1}}" label="负责人" value="{{ma}}" required is-link readonly
+                        bind:tap="goSelectMa" input-align="right" error-message="{{errma}}"
+                        error-message-align="right" />
+                </van-cell-group>
+            </view>
+            <view>
+                <van-cell-group>
+                    <van-field label="截止日期" value="{{etfmt}}" required is-link readonly bind:tap="calendarShow"
+                        input-align="right" error-message="{{erretfmt}}" error-message-align="right" />
+                    <van-field label="优先级" value="{{pr}}" required is-link readonly bind:tap="selectShow"
+                        input-align="right" error-message="{{errpr}}" error-message-align="right" />
+                </van-cell-group>
+            </view>
+            <view>
+                <van-cell-group>
+                    <van-cell title="抄送" value="{{cmn}}" is-link bind:tap="goSelectCC" />
+                    <view class="tipps">知会相关人员,让他们也能了解任务的进展</view>
+                </van-cell-group>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" bind:click="handleCancle">
+                取消
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="handleSave">
+                保存
+            </van-button>
+        </view>
+    </view>
+    <van-calendar show="{{ isCalendarShow }}" bind:close="calendarShow" bind:confirm="onetConfirm"
+        min-date="{{ minDate }}" max-date="{{ maxDate }}" default-date="{{currDate}}" color="#07C160" />
+        <pickerPopup isShow="{{isShow}}" columns="{{columns}}" bind:onConfirm="onConfirm" />
+</view>

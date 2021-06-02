@@ -1,0 +1,67 @@
+.userinfo {
+  display: flex;
+  height: 272rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+.userinfo::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 20rpx;
+  background: #f8f8f8;
+  bottom: -20rpx;
+}
+.userinfo .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 32rpx;
+}
+.userinfo .image .userinfo-avatar {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+}
+.userinfo .username {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 32rpx;
+}
+.userinfo .username .nickname {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 48rpx;
+  display: inline-block;
+  margin-right: 32rpx;
+  margin-bottom: 10rpx;
+}
+.userinfo .username .bemerkungen {
+  width: 300rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.3);
+  line-height: 34rpx;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.btnSignout {
+  width: 50%;
+  height: 80rpx;
+  display: flex;
+}
+.btnSignout .van-button {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+}
+.btnSignout .van-button__text {
+  color: #FA5151;
+  font-size: 34rpx;
+  font-weight: 600;
+}

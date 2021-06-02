@@ -1,0 +1,15 @@
+<!--pages/menu/costManagement/reimbursement/invoiceInfo/index.wxml-->
+<view class="m-window m-detailFee">
+    <view class="de-title">
+        <text>发票数{{detail.length}}张，金额{{totalAmount}}元</text>
+    </view>
+    <van-cell-group wx:for="{{detail}}" wx:key="index">
+        <van-panel title="{{item.invoiceTypeName}}" status="实报{{item.realAmount}}">
+            <van-cell title="发票号码" value="{{item.invoiceNumber}}" custom-class="" />
+            <van-cell title="发票金额" value="{{item.currency + ' '+ item.invoiceAmount}}" custom-class="" />
+            <van-cell title="发票抬头" value="{{item.buyerName}}" custom-class="" />
+            <van-cell title="销方名称" value="{{item.salesName}}" custom-class="" />
+            <van-cell title="开票日期" value="{{item.invoiceDate}}" custom-class="" />
+        </van-panel>
+    </van-cell-group>
+</view>

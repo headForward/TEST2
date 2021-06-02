@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+      "van-cell-group": "@vant/weapp/cell-group/index",
+      "van-uploader": "@vant/weapp/uploader/index",
+      "van-field": "@vant/weapp/field/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-calendar": "@vant/weapp/calendar/index"
+  },
+  "navigationBarTitleText": "编辑合同"
+}

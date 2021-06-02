@@ -1,0 +1,43 @@
+<!-- pages/menu/sales/salesPlan/editPlan/index.wxml -->
+<view class="m-window m-editPlan m-flex">
+    <view class="m-middle">
+        <scroll-view scroll-y class="m-scroll">
+            <view>
+                <van-cell-group>
+                    <van-field name="yearname" label="计划年份" value="{{detailList.yearname}}" required readonly is-link="{{!isEdit}}" bind:tap="selectShow" data-label="yearname" input-align="right" />
+                    <van-field name="area" label="区域" value="{{detailList.area}}" required placeholder="输入区域" bind:blur="handleChange" data-label="area" input-align="right" error-message="{{errarea}}" error-message-align="right" />
+                    <van-field name="planType" label="计划类型" value="{{detailList.planType}}" required readonly is-link="{{!isEdit}}" bind:tap="selectShow" data-label="planType" input-align="right" error-message="{{errplanType}}" error-message-align="right" />
+                    <van-field name="cycle" label="计划周期" wx:if="{{!isYear}}" value="{{detailList.cycle}}" required readonly is-link bind:tap="selectShow" data-label="cycle" input-align="right" error-message="{{errcycle}}" error-message-align="right" />
+                    <van-field name="plantotalfmt" label="计划总额" value="{{detailList.plantotalfmt}}" required readonly="{{isEdit}}" placeholder="输入计划总额" input-align="right" bind:focus="onFocus" bind:change="handleInput" bind:blur="handleChange" data-label="plantotalfmt" error-message="{{errplantotalfmt}}" error-message-align="right" maxlength="{{isEdit ? '-1' :numLen}}" />
+                    <van-field name="fintotal" label="完成总额" wx:if="{{isEdit}}" value="{{detailList.finishtotalfmt}}" readonly input-align="right" />
+                    <van-field name="ower" label="归属人" value="{{detailList.ower}}" required readonly is-link="{{!isEdit}}" bind:tap="goSelectFollower" input-align="right" error-message="{{errower}}" error-message-align="right" />
+                </van-cell-group>
+            </view>
+            <view class="contacts">
+                <block wx:for="{{detailList.detail}}" wx:key="index">
+                    <view class="contactsInfo" data-idx="{{index}}" bind:tap="removeRecord" wx:if="{{item.isNew}}">
+                        <text class="infoAdd">删除</text>
+                    </view>
+                    <van-cell-group title="分类信息{{index+1}}">
+                        <van-field name="name" label="分类名称" value="{{item.name}}" placeholder="请输入分类名称" required bind:blur="handleDetailChange" data-label="name" data-idx="{{index}}" input-align="right" error-message="{{item.errname}}" error-message-align="right" />
+                        <van-field name="plan" label="计划金额" value="{{item.planfmt}}" placeholder="请输入计划金额" required readonly="{{isEdit&&!item.isNew}}" bind:blur="handleDetailChange" bind:focus="onFocus" bind:change="handleInput" data-label="plan" data-idx="{{index}}" input-align="right" error-message="{{item.errplanfmt}}" error-message-align="right" maxlength="{{item.plannumLen}}" />
+                        <van-field label="完成金额" value="{{item.finfmt}}" placeholder="请输入完成金额" bind:blur="handleDetailChange" bind:focus="onFocus" bind:change="handleInput" data-label="fin" data-idx="{{index}}" input-align="right" wx:if="{{isEdit}}" error-message="{{item.errfinfmt}}" error-message-align="right" maxlength="{{item.finnumLen}}" />
+                    </van-cell-group>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="m-footer">
+        <view class="btn">
+            <van-button plain type="primary" class="btnLeft" bind:click="addRecord">
+                添加分类
+            </van-button>
+            <van-button type="primary" size="normal" class="btnRight" bind:click="handleSave">
+                保存
+            </van-button>
+        </view>
+    </view>
+    <van-popup show="{{ isSelectShow }}" position="bottom">
+        <van-picker columns="{{ columns }}" show-toolbar bind:cancel="onCancel" bind:confirm="onConfirm" />
+    </van-popup>
+</view>
